@@ -2,7 +2,7 @@
 import { HttpContext } from '@adonisjs/core/http'
 import OpenIDService from '#services/openid_service'
 
-export default class OauthController {
+export default class OpenIDsController {
   private oauthService = new OpenIDService()
 
   async authorize({ request, response }: HttpContext) {
