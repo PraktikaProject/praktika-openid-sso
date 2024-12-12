@@ -1,5 +1,5 @@
-import OpenidClientsController from '#controllers/openid_clients_controller'
 import router from '@adonisjs/core/services/router'
+import OpenidClientsController from '#controllers/openid_clients_controller'
 
 export default function openIDClientsRoute() {
   router
