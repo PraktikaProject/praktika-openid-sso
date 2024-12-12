@@ -43,9 +43,9 @@ export default class OpenIDService {
         .compile(AuthValidator.loginSchema)
         .validate(data, { messagesProvider })
 
-      const user = await User.verifyCredentials(validatedData.email, validatedData.password)
+      const user = await User.verifyCredentials(validatedData.myITSId, validatedData.password)
       if (!user) {
-        throw new Error('Invalid email or password.')
+        throw new Error('Invalid credentials.')
       }
 
       const authCode = await AuthCode.create({
