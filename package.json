@@ -18,6 +18,7 @@
     "#exceptions/*": "./app/exceptions/*.js",
     "#models/*": "./app/models/*.js",
     "#mails/*": "./app/mails/*.js",
+    "#helpers/*": "./helpers/*.js",
     "#services/*": "./app/services/*.js",
     "#listeners/*": "./app/listeners/*.js",
     "#events/*": "./app/events/*.js",
@@ -60,7 +61,8 @@
     "@vinejs/vine": "^2.1.0",
     "luxon": "^3.5.0",
     "pg": "^8.13.1",
-    "reflect-metadata": "^0.2.2"
+    "reflect-metadata": "^0.2.2",
+    "uuid": "^11.0.3"
   },
   "hotHook": {
     "boundaries": [
