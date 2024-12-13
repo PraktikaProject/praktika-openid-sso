@@ -128,3 +128,8 @@ This flow ensures secure and standardized authentication, leveraging the power o
 
 6. **Test the SSO**:
    - Visit the application in your browser, and initiate the login process to verify the SSO functionality.
+
+# API Documentation
+
+For more information about the SSO (Single Sign-On) implementation, you can refer to the official API documentation here:  
+[SSO API Documentation](https://web.postman.co/workspace/d25f6e54-2c72-408a-918c-44bcb12ffefe)

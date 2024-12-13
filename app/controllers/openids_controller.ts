@@ -88,9 +88,7 @@ export default class OpenIDsController {
       return response.ok({
         success: true,
         message: 'Login successful.',
-        data: {
-          token: token,
-        },
+        data: token,
       })
     } catch (error) {
       return response.internalServerError({
