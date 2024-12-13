@@ -87,7 +87,6 @@ export default class OpenIDService {
     if (!user) {
       throw new Error('Invalid user.')
     }
-
     await authCode.delete()
     return user
   }

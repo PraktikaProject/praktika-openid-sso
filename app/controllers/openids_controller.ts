@@ -84,7 +84,6 @@ export default class OpenIDsController {
           message: 'Failed to generate access token.',
         })
       }
-
       return response.ok({
         success: true,
         message: 'Login successful.',
