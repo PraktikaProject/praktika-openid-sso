@@ -56,6 +56,7 @@ export default class OpenidClientsController {
     try {
       const clientId = uuidv4()
       const clientSecret = uuidv4()
+      console.log(data)
       const openIDClient = await OpenIDClient.create({
         ...data,
         clientId,

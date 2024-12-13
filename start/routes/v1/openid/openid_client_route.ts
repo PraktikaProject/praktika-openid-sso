@@ -10,5 +10,6 @@ export default function openIDClientsRoute() {
       router.delete('/:name', [OpenidClientsController, 'destroy'])
       router.patch('/:name', [OpenidClientsController, 'update'])
     })
-    .prefix('/openid/clients')
+    
+    .prefix('/clients')
 }
