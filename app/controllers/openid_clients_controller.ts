@@ -12,13 +12,13 @@ export default class OpenidClientsController {
       const examples = await OpenIDClient.all()
       return response.ok({
         success: true,
-        message: 'Examples retrieved successfully.',
+        message: 'OpenID retrieved successfully.',
         data: examples,
       })
     } catch (error) {
       return response.internalServerError({
         success: false,
-        message: 'Failed to retrieve examples.',
+        message: 'Failed to retrieve OpenID.',
         error: error.message,
       })
     }
@@ -26,23 +26,23 @@ export default class OpenidClientsController {
 
   async show({ params, response }: HttpContext) {
     try {
-      const oauthClient = await OpenIDClient.query().where('name', params.name).first()
-      if (!oauthClient) {
+      const openidClient = await OpenIDClient.query().where('name', params.name).first()
+      if (!openidClient) {
         return response.notFound({
           success: false,
-          message: 'Oauth client not found.',
+          message: 'OpenID client not found.',
         })
       }
 
       return response.ok({
         success: true,
-        message: 'Oauth client retrieved successfully.',
-        data: oauthClient,
+        message: 'OpenID client retrieved successfully.',
+        data: openidClient,
       })
     } catch (error) {
       return response.internalServerError({
         success: false,
-        message: 'Oauth client failed to retrieve.',
+        message: 'OpenID client failed to retrieve.',
         error: error.message,
       })
     }
@@ -56,7 +56,7 @@ export default class OpenidClientsController {
     try {
       const clientId = uuidv4()
       const clientSecret = uuidv4()
-      const oauthClient = await OpenIDClient.create({
+      const openIDClient = await OpenIDClient.create({
         ...data,
         client_id: clientId,
         client_secret: clientSecret,
@@ -64,13 +64,13 @@ export default class OpenidClientsController {
 
       return response.created({
         success: true,
-        message: 'Oauth client created successfully.',
-        data: oauthClient,
+        message: 'OpenID client created successfully.',
+        data: openIDClient,
       })
     } catch (error) {
       return response.internalServerError({
         success: false,
-        message: 'Failed to create oauth client.',
+        message: 'Failed to create OpenID client.',
         error: error.message,
       })
     }
@@ -82,17 +82,17 @@ export default class OpenidClientsController {
       .validate(request.all(), { messagesProvider })
 
     try {
-      const oauthClient = await OpenIDClient.query().where('name', params.name).first()
-      if (!oauthClient) {
+      const openIDClient = await OpenIDClient.query().where('name', params.name).first()
+      if (!openIDClient) {
         return response.notFound({
           success: false,
-          message: 'Oauth client not found.',
+          message: 'OpenID client not found.',
         })
       }
 
       const clientId = uuidv4()
       const clientSecret = uuidv4()
-      await oauthClient
+      await openIDClient
         .merge({
           ...data,
           client_id: clientId,
@@ -101,13 +101,13 @@ export default class OpenidClientsController {
         .save()
       return response.ok({
         success: true,
-        message: 'Oauth client updated successfully.',
-        data: oauthClient,
+        message: 'OpenID client updated successfully.',
+        data: openIDClient,
       })
     } catch (error) {
       return response.internalServerError({
         success: false,
-        message: 'Failed to update oauth client.',
+        message: 'Failed to update OpenID client.',
         error: error.message,
       })
     }
@@ -115,23 +115,23 @@ export default class OpenidClientsController {
 
   async destroy({ params, response }: HttpContext) {
     try {
-      const oauthClient = await OpenIDClient.query().where('name', params.name).first()
-      if (!oauthClient) {
+      const openIDClient = await OpenIDClient.query().where('name', params.name).first()
+      if (!openIDClient) {
         return response.notFound({
           success: false,
-          message: 'Oauth client not found.',
+          message: 'OpenID client not found.',
         })
       }
 
-      await oauthClient.delete()
+      await openIDClient.delete()
       return response.ok({
         success: true,
-        message: 'Oauth client deleted successfully.',
+        message: 'OpenID client deleted successfully.',
       })
     } catch (error) {
       return response.internalServerError({
         success: false,
-        message: 'Failed to delete oauth client.',
+        message: 'Failed to delete OpenID client.',
         error: error.message,
       })
     }

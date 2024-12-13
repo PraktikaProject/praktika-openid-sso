@@ -1,9 +1,8 @@
-// app/Controllers/Http/OauthController.ts
 import { HttpContext } from '@adonisjs/core/http'
 import OpenIDService from '#services/openid_service'
 
 export default class OpenIDsController {
-  private oauthService = new OpenIDService()
+  private openIDService = new OpenIDService()
 
   async authorize({ request, response }: HttpContext) {
     const {
@@ -29,8 +28,8 @@ export default class OpenIDsController {
       })
     }
 
-    const oauthClient = await this.oauthService.validateOauthClient(clientId, scope, redirectUri)
-    if (!oauthClient) {
+    const openIDClient = await this.openIDService.validateOpenIDClient(clientId, scope, redirectUri)
+    if (!openIDClient) {
       return response.unauthorized({
         success: false,
         message: 'Invalid client_id, scope, or redirect_uri.',
@@ -38,7 +37,7 @@ export default class OpenIDsController {
     }
 
     try {
-      const authCode = await this.oauthService.generateAuthorizationCode(request.all(), oauthClient, scope, redirectUri, nonce, state)
+      const authCode = await this.openIDService.generateAuthorizationCode(request.all(), openIDClient, scope, redirectUri, nonce, state)
       return response.ok({
         success: true,
         message: 'Authorization code generated successfully.',
@@ -77,7 +76,7 @@ export default class OpenIDsController {
     }
 
     try {
-      const user = await this.oauthService.processTokenRequest(code, clientId, clientSecret)
+      const user = await this.openIDService.processTokenRequest(code, clientId, clientSecret)
       const token = await auth.use('jwt').generate(user)
       if (!token) {
         return response.unprocessableEntity({

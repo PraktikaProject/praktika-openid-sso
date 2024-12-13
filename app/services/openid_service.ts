@@ -15,7 +15,7 @@ export default class OpenIDService {
     return isValid ? requested : null
   }
 
-  async validateOauthClient(clientId: string, scopes: string, redirectUri: string) {
+  async validateOpenIDClient(clientId: string, scopes: string, redirectUri: string) {
     const oauthClient = await OauthClient.findBy('client_id', clientId)
     if (!oauthClient) return null
 

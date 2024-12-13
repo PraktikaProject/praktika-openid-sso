@@ -15,7 +15,7 @@ export default class AuthController {
       if (await User.query().where('myITSId', '=', data.myITSId).first()) {
         return response.conflict({
           success: false,
-          message: 'The email has already been taken.',
+          message: 'The myITSId has already been taken.',
         })
       }
     } catch (error) {

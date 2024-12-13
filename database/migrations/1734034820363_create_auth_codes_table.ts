@@ -7,7 +7,7 @@ export default class extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
       table.string('code').notNullable()
-      table.string('client_id').unsigned().references('oauth_clients.client_id')
+      table.string('client_id').unsigned().references('openid_clients.client_id')
       table.integer('user_id').unsigned().references('users.id')
       table.string('nonce').nullable()
       table.string('state').nullable()
