@@ -18,10 +18,10 @@ export default class OpenIDService {
   }
 
   async validateOpenIDClient(clientId: string, scopes: string, redirectUri: string) {
-    const openIDClient = await OpenIDClient.findBy('client_id', clientId)
+    const openIDClient = await OpenIDClient.findBy('client_id', clientId)    
     if (!openIDClient) return null
 
-    const allowedScopes = openIDClient.allowedScopes.split(',').map((s) => s.trim())
+    const allowedScopes = openIDClient.allowedScopes.split(' ').map((s) => s.trim())
     const validScopes = this.validateScopes(scopes, allowedScopes)
     if (!validScopes) return null
 

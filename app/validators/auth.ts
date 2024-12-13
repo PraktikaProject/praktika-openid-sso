@@ -2,7 +2,7 @@ import vine from '@vinejs/vine'
 
 export default class AuthValidator {
   static loginSchema = vine.object({
-    myITSId: vine.string().trim().email(),
+    myITSId: vine.string().trim(),
     password: vine.string(),
   })
 

@@ -6,10 +6,10 @@ export default class OpenIDsController {
 
   async authorize({ request, response }: HttpContext) {
     const {
-      client_id: clientId,
-      redirect_uri: redirectUri,
+      clientId,
+      redirectUri,
       scope,
-      response_type: responseType,
+      responseType,
       state,
       nonce,
     } = request.qs()

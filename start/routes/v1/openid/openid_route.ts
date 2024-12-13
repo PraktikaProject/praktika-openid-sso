@@ -13,5 +13,4 @@ export default function openIdsRoute() {
         })
         .middleware(middleware.auth({ guards: ['jwt'] }))
     })
-    .prefix('/oauth')
 }
