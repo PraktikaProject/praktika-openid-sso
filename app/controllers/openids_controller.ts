@@ -55,10 +55,10 @@ export default class OpenIDsController {
 
   async token({ request, response, auth }: HttpContext) {
     const {
-      grant_type: grantType,
+      grantType,
       code,
-      client_id: clientId,
-      client_secret: clientSecret,
+      clientId,
+      clientSecret,
     } = request.qs()
 
     if (!grantType || !code || !clientId || !clientSecret) {
