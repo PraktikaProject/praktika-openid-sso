@@ -18,6 +18,11 @@ export default class AuthController {
           message: 'The myITSId has already been taken.',
         })
       }
+     await User.create(data)
+      return response.created({
+        success: true,
+        message: 'User registered successfully.',
+      })
     } catch (error) {
       return response.internalServerError({
         success: false,

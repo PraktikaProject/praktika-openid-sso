@@ -10,7 +10,7 @@ export default class AuthValidator {
     fullName: vine.string().trim(),
     myITSId: vine.string().trim(),
     email: vine.string().trim().email(),
-    password: vine.string().confirmed(),
+    password: vine.string(),
   })
 
   static forgotPasswordSchema = vine.object({

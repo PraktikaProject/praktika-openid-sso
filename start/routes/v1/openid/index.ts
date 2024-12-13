@@ -4,6 +4,7 @@ import openIdRoute from './openid_route.js'
 import authRoute from './auth_route.js'
 
 export default function openIDRoute() {
+  
   router
     .group(() => {
         authRoute()

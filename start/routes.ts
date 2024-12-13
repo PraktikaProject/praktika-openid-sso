@@ -22,5 +22,5 @@ router
   .group(() => {
     v1Route()
   })
-  .prefix('/api/v1')
+  .prefix('/api')
 

@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 
-export default class OpenidClient extends BaseModel {
+export default class OpenIDClient extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
 
@@ -9,16 +9,16 @@ export default class OpenidClient extends BaseModel {
   declare name: string
 
   @column()
-  declare client_id: string
+  declare clientId: string
 
   @column()
-  declare client_secret: string
+  declare clientSecret: string
 
   @column()
-  declare redirect_uri: string
+  declare redirectUri: string
 
   @column()
-  declare allowed_scopes: string
+  declare allowedScopes: string
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

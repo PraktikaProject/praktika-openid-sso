@@ -58,8 +58,8 @@ export default class OpenidClientsController {
       const clientSecret = uuidv4()
       const openIDClient = await OpenIDClient.create({
         ...data,
-        client_id: clientId,
-        client_secret: clientSecret,
+        clientId,
+        clientSecret,
       })
 
       return response.created({
@@ -95,8 +95,8 @@ export default class OpenidClientsController {
       await openIDClient
         .merge({
           ...data,
-          client_id: clientId,
-          client_secret: clientSecret,
+          clientId,
+          clientSecret,
         })
         .save()
       return response.ok({

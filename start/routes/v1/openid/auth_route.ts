@@ -4,7 +4,7 @@ import AuthController from '#controllers/auth_controller'
 export default function authRoute() {
   router
     .group(() => {
-      router.get('/register', [AuthController, 'register'])
+      router.post('/register', [AuthController, 'register'])
 
     })
     .prefix('/auth')

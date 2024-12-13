@@ -1,11 +1,13 @@
 import { DateTime } from 'luxon'
 import { v4 as uuidv4 } from 'uuid'
-import OauthClient from '#models/openid_client'
+import vine from '@vinejs/vine'
+
+
+import OpenIDClient from '#models/openid_client'
 import AuthCode from '#models/auth_code'
 import User from '#models/user'
 import AuthValidator from '#validators/auth'
 import messagesProvider from '#helpers/validation_messages_provider'
-import vine from '@vinejs/vine'
 
 export default class OpenIDService {
   private validateScopes(requestedScopes: string, allowedScopes: string[]): string[] | null {
@@ -16,17 +18,17 @@ export default class OpenIDService {
   }
 
   async validateOpenIDClient(clientId: string, scopes: string, redirectUri: string) {
-    const oauthClient = await OauthClient.findBy('client_id', clientId)
-    if (!oauthClient) return null
+    const openIDClient = await OpenIDClient.findBy('client_id', clientId)
+    if (!openIDClient) return null
 
-    const allowedScopes = oauthClient.allowed_scopes.split(',').map((s) => s.trim())
+    const allowedScopes = openIDClient.allowedScopes.split(',').map((s) => s.trim())
     const validScopes = this.validateScopes(scopes, allowedScopes)
     if (!validScopes) return null
 
-    if (!oauthClient.redirect_uri.startsWith('http')) {
+    if (!openIDClient.redirectUri.startsWith('http')) {
       return null
     }
-    const allowedUri = new URL(oauthClient.redirect_uri)
+    const allowedUri = new URL(openIDClient.redirectUri)
     const requestedUri = new URL(redirectUri)
     if (
       allowedUri.origin !== requestedUri.origin ||
@@ -34,10 +36,10 @@ export default class OpenIDService {
     ) {
       return null
     }
-    return oauthClient
+    return openIDClient
   }
 
-  async generateAuthorizationCode(data: any, oauthClient: any, scope: string, redirectUri: string, nonce: string | null, state: string) {
+  async generateAuthorizationCode(data: any, openIDClient: any, scope: string, redirectUri: string, nonce: string | null, state: string) {
     try {
       const validatedData = await vine
         .compile(AuthValidator.loginSchema)
@@ -50,7 +52,7 @@ export default class OpenIDService {
 
       const authCode = await AuthCode.create({
         code: uuidv4(),
-        clientId: oauthClient.client_id,
+        clientId: openIDClient.clientId,
         userId: user.id,
         scopes: scope,
         nonce: nonce || null,
@@ -66,8 +68,8 @@ export default class OpenIDService {
   }
 
   async processTokenRequest(code: string, clientId: string, clientSecret: string) {
-    const oauthClient = await OauthClient.findBy('client_id', clientId)
-    if (!oauthClient || oauthClient.client_secret !== clientSecret) {
+    const openIDClient = await OpenIDClient.findBy('client_id', clientId)
+    if (!openIDClient || openIDClient.clientSecret !== clientSecret) {
       throw new Error('Invalid client credentials.')
     }
 
